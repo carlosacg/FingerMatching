@@ -1,27 +1,10 @@
-FROM ubuntu:latest as base
-
-RUN apt-get -y update
-
+FROM python
 ENV PYTHONUNBUFFERED=1
-
-ENV DJANGO_DIR=/metodos
-
-WORKDIR $DJANGO_DIR
-
-RUN apt-get -y install python3
-
-RUN apt-get -y install python3-pip
-
-RUN pip3 install --upgrade pip
-
-FROM base as with-requirements
-
-COPY requirements.txt $DJANGO_DIR/
-
+WORKDIR /app
+COPY requirements.txt .
 RUN pip3 install -r requirements.txt
-
-RUN apt -y update
-
-RUN apt-get install -y libgl1-mesa-glx 
-
-RUN apt-get install -y libatlas-base-dev gfortran
+COPY . .
+RUN python3 manage.py makemigrations
+RUN python3 manage.py migrate
+EXPOSE 8000
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
