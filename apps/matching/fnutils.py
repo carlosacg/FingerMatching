@@ -37,7 +37,7 @@ def get_match(route):
 
 def get_data_images(folders):
     for folder in folders:
-        sub_name = folder.split('\\')[1]
+        sub_name = folder.split('/')[1]
         data_images[sub_name] = []
         for image in glob.glob(f'{folder}/*.jpg'):
             sub_image = cv2.imread(image)
