@@ -1,4 +1,7 @@
 # Proyecto Final Metodos Numericos
+## Prerrequisitos.
+
+- Tener Docker instalado
 
 ## Como ejecutar el programa.
 
